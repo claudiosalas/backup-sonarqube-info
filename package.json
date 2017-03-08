@@ -16,7 +16,7 @@
   "author": "Claudio Salas",
   "license": "MIT",
   "bin": {
-    "backup-sonarqube-info": "./app/index.js"
+    "sonarqube-info": "./app/index.js"
   },
   "bugs": {
     "url": "https://github.com/claudiosalas/backup-sonarqube-info/issues"
