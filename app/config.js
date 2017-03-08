@@ -1,9 +1,10 @@
 
-var SONARQUBE_URL = 'https://sonarqube.as-crdbi-dev.com';
+const SONARQUBE_URL = 'https://sonarqube.as-crdbi-dev.com';
 
-var config = {};
+const config = {};
 config.sonarqube = {};
 config.sonarqube.api = {};
+
 config.sonarqube.api.key = process.env.SONARQUBE_API_KEY;
 config.sonarqube.api.plugins = {
 	list: `${SONARQUBE_URL}/api/plugins/installed`
