@@ -12,7 +12,7 @@ const options = function(url) {
 	return {
 		hostname: url,
 		headers: { 
-			Authorization:  basicAuthorization();
+			Authorization:  basicAuthorization()
 		}
 	}
 }
@@ -60,7 +60,7 @@ const httpGet = function({ url = null, toJSON = false } = {}) {
 
 methods.get.json = function(url) {
 	return httpGet( { url: url, toJSon: true } )
-		.then(data => data);
+		.then(data => data)
 		.catch(err => err)
 };
 
