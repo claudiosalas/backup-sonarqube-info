@@ -15,8 +15,14 @@
   ],
   "author": "Claudio Salas",
   "license": "MIT",
+  "bin": {
+    "backup-sonarqube-info": "./app/index.js"
+  },
   "bugs": {
     "url": "https://github.com/claudiosalas/backup-sonarqube-info/issues"
   },
-  "homepage": "https://github.com/claudiosalas/backup-sonarqube-info#readme"
+  "homepage": "https://github.com/claudiosalas/backup-sonarqube-info#readme",
+  "dependencies": {
+    "commander": "^2.9.0"
+  }
 }
