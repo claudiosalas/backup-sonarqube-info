@@ -14,7 +14,7 @@ config.sonarqube.api.qualitygates = {
 }
 config.sonarqube.api.qualityprofiles = {
 	list: '/api/qualityprofiles/search',
-	backup: '/api/qualityprofiles/backup?key='
+	backup: '/api/qualityprofiles/backup?profileKey='
 }
 
 
