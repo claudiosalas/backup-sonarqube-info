@@ -1,0 +1,22 @@
+{
+  "name": "backup-sonarqube-info",
+  "version": "0.0.1",
+  "description": "A command-line tooo for create a backup of SonarQube information",
+  "main": "index.js",
+  "scripts": {
+    "test": "Apache-2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/claudiosalas/backup-sonarqube-info.git"
+  },
+  "keywords": [
+    "backup", "sonarqube", "info"
+  ],
+  "author": "Claudio Salas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/claudiosalas/backup-sonarqube-info/issues"
+  },
+  "homepage": "https://github.com/claudiosalas/backup-sonarqube-info#readme"
+}
