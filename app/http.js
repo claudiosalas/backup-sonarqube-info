@@ -74,5 +74,13 @@ methods.get.text = function( options ) {
 		.catch(err => err)
 };
 
+methods.get.xml = function( options ) {
+	const xmlOptions = formatOptions(options)
+	xmlOptions.headers['Content-Type'] = 'text/xml';
+	return httpRequest( { options:  } )
+		.then(data => data)
+		.catch(err => err)
+};
+
 
 module.exports = methods;

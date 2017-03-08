@@ -10,19 +10,27 @@ const opts = {
 const backupPluginsList = function(path) {
 	opts.path = sonarqube.api.plugins.list;
 	http.get.json(opts)
-	.then(data => console.log(data));
+			.then(data => console.log(data));
 }
 
 const backupQualityGates = function(path) {
 	opts.path = sonarqube.api.qualitygates.list
-	http.get.json(opts).then(data => console.log(data));
+	http.get.json(opts)
+			.then(data => console.log(data));
 }
 
+const processXMLQualityProfile = function(xml){
+	console.log(xml);
+}
 const backupQualityProfiles = function(path) {
 	opts.path = sonarqube.api.qualityprofiles.list
 	http.get.json(opts).then(data => {
-		const urls = data.profiles.map(profile => `${sonarqube.api.qualityprofiles.backup}${profile.key}`)
-		console.log(urls);
+		const paths = data.profiles.map(profile => `${sonarqube.api.qualityprofiles.backup}${profile.key}`)
+		for(const [index, path] of paths.entries()){
+			opts.path = path,
+			http.get.xml(opts)
+					.then(data => processXMLQualityProfile(data));
+		}
 	});
 }
 
