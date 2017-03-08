@@ -59,15 +59,15 @@ const httpGet = function({ url = null, toJSON = false } = {}) {
 };
 
 methods.get.json = function(url) {
-	return httpGet({ url: url, toJSon: true });
-		.then(data => return data);
-		.catch(err => return err)
+	return httpGet( { url: url, toJSon: true } )
+		.then(data => data);
+		.catch(err => err)
 };
 
 methods.get.text = function(url) {
-	return httpGet({ url: url } );
-		.then(data => return data);
-		.catch(err => return err)
+	return httpGet( { url: url } )
+		.then(data => data)
+		.catch(err => err)
 };
 
 
