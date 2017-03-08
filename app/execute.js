@@ -1,13 +1,15 @@
-const configuration = require('./config')
+const configuration = require('./config');
+const http = require('./http');
+const sonarqube = configuration.sonarqube;
+
 const execute = {};
 
-execute.init = function(path) {
-	console.log(`Path received as argument: ${path}`);
-	console.log(`{config.sonarqube.api.key}`);
-	console.log(`{config.sonarqube.api.plugins.list}`);
-	console.log(`{config.sonarqube.api.qualitygates.list}`);
-	console.log(`{config.sonarqube.api.qualityprofiles.list}`);
-	console.log(`{config.sonarqube.api.qualityprofiles.backup}`);
+execute.backup = function(path) {
+	console.log(`[execute][backup] - Backup will be saved at: ${path}`);
+	console.log(http.get.json(sonarqube.api.plugins.list));
+	console.log(http.get.json(sonarqube.api.qualitygates.list));
+	console.log(http.get.json(sonarqube.api.qualityprofiles.list));
 }
+
 
 module.exports = execute;
