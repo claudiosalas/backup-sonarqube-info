@@ -25,12 +25,12 @@ const processXMLQualityProfile = function(xml){
 const backupQualityProfiles = function(path) {
 	opts.path = sonarqube.api.qualityprofiles.list
 	http.get.json(opts).then(data => {
-		const paths = data.profiles.map(profile => `${sonarqube.api.qualityprofiles.backup}${profile.key}`)
-		for(const [index, path] of paths.entries()){
-			opts.path = path,
+		data.profiles.map(profile => {
+			opts.path = `${sonarqube.api.qualityprofiles.backup}${profile.key}`;
 			http.get.xml(opts)
 					.then(data => processXMLQualityProfile(data));
-		}
+			
+		});
 	});
 }
 

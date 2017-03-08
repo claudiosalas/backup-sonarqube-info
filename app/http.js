@@ -40,9 +40,7 @@ const httpRequest = function( { options = {}, toJSON = false } = {} ) {
 		
 			if (response.statusCode < 200 || response.statusCode > 299) {
 				reject(new Error(`Failed to load page, status code: ${response.statusCode}`));
-			} else if (!/^application\/json/.test(contentType)) {
-	    		reject(new Error(`Invalid content-type.\nExpected application/json but received ${contentType}`));
-	    	}
+			}
 	    	
 			const rawData = [];
 			// on every content chunk, push it to the data array
@@ -76,7 +74,7 @@ methods.get.text = function( options ) {
 
 methods.get.xml = function( options ) {
 	const xmlOptions = formatOptions(options)
-	xmlOptions.headers['Content-Type'] = 'text/xml';
+	xmlOptions.headers['Content-Type'] = 'application/xml;charset=utf-8';
 	return httpRequest( { options: xmlOptions } )
 		.then(data => data)
 		.catch(err => err)
