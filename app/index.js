@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-var program = required('commander');
+var program = require('commander');
 
 program
 	.arguments('<path>')
