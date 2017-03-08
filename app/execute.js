@@ -6,10 +6,15 @@ const execute = {};
 
 execute.backup = function(path) {
 	console.log(`[execute][backup] - Backup will be saved at: ${path}`);
-	http.get.json(sonarqube.api.plugins.list).then(data => console.log(data));
-	http.get.json(sonarqube.api.qualitygates.list).then(data => console.log(data));
-	http.get.json(sonarqube.api.qualityprofiles.list).then(data => console.log(data));
-	
-
+	var opts = {
+		host: sonarqube.url,
+		path: sonarqube.api.plugins.list
+	};
+	http.get.json(opts).then(data => console.log(data));
+	opts.path = sonarqube.api.qualitygates.list
+	http.get.json(opts).then(data => console.log(data));
+	opts.path = sonarqube.api.qualityprofiles.list
+	http.get.json(opts).then(data => console.log(data));
+}
 
 module.exports = execute;

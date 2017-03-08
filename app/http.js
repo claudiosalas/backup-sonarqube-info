@@ -1,29 +1,26 @@
-const http = require('http');
 const configuration = require('./config');
 const sonarqube = configuration.sonarqube;
 const methods = {};
 methods.get = {};
 
 const basicAuthorization = function() {
-	return 'Basic ' + btoa( `${sonarqube.api.key}:`);
+	return 'Basic ' + new Buffer( `${sonarqube.api.key}:` ).toString('base64');
 }
 
-const options = function(url) {
+const formatOptions = function( { host = null, path = null } = {} ) {
 	return {
-		hostname: url,
+		host: host,
+		path: path,
 		headers: { 
 			Authorization:  basicAuthorization()
 		}
 	}
 }
 
-const httpGet = function({ url = null, toJSON = false } = {}) {
+const httpRequest = function( { options = {}, toJSON = false } = {} ) {
 	// return new pending promise
 	return new Promise((resolve, reject) => {
-		// select http or https module, depending on reqested url
-		const options = options(url);
-		const lib = options.hostname.startsWith('https') ? require('https') : require('http');
-		
+
 		const parseToJSON = function(rawData) {
 			try {
 				let json = JSON.parse(rawData)
@@ -33,7 +30,10 @@ const httpGet = function({ url = null, toJSON = false } = {}) {
 			}
 		}
 
-		const request = lib.get(options, (response) => {
+		// select http or https module, depending on reqested url
+		const http = options.host.startsWith('https') ? require('https') : require('http');
+
+		const request = http.request(options, (response) => {
 			const contentType = response.headers['content-type'];
 			// handle http errors
 			if (response.statusCode < 200 || response.statusCode > 299) {
@@ -58,14 +58,14 @@ const httpGet = function({ url = null, toJSON = false } = {}) {
 	});
 };
 
-methods.get.json = function(url) {
-	return httpGet( { url: url, toJSon: true } )
+methods.get.json = function( options ) {
+	return httpRequest( { options: formatOptions(options), toJSon: true } )
 		.then(data => data)
 		.catch(err => err)
 };
 
-methods.get.text = function(url) {
-	return httpGet( { url: url } )
+methods.get.text = function( options ) {
+	return httpRequest( { options: formatOptions(options) } )
 		.then(data => data)
 		.catch(err => err)
 };
