@@ -1,0 +1,16 @@
+{
+	"sonarqube": {
+		"api": {
+			"plugins": {
+				"list": "/api/plugins/installed"
+			},
+			"qualitygates": {
+				"list": "/api/qualitygates/list"
+			},
+			"qualityprofiles": {
+				"list": "/api/qualityprofiles/search",
+				"backup": "/api/qualityprofiles/backup"
+			}
+		}
+	}
+}

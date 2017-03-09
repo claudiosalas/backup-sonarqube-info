@@ -1,4 +1,4 @@
-const configuration = require('./config');
+const configuration = require('./configuration');
 const sonarqube = configuration.sonarqube;
 const methods = {};
 methods.get = {};
@@ -7,7 +7,7 @@ const basicAuthorization = function() {
 	return 'Basic ' + new Buffer( `${sonarqube.api.key}:` ).toString('base64');
 }
 
-const formatOptions = function( { host = null, path = null, method = 'GET' } = {} ) {
+const buildOptions = function( { host = null, path = null, method = 'GET' } = {} ) {
 	return {
 		url: host,
 		host: host.replace(/^(https?:|)\/\//,''),
@@ -61,19 +61,19 @@ const httpRequest = function( { options = {}, toJSON = false } = {} ) {
 };
 
 methods.get.json = function( options ) {
-	return httpRequest( { options: formatOptions(options), toJSON: true } )
+	return httpRequest( { options: buildOptions(options), toJSON: true } )
 		.then(data => data)
 		.catch(err => err)
 };
 
 methods.get.text = function( options ) {
-	return httpRequest( { options: formatOptions(options) } )
+	return httpRequest( { options: buildOptions(options) } )
 		.then(data => data)
 		.catch(err => err)
 };
 
 methods.get.xml = function( options ) {
-	const xmlOptions = formatOptions(options)
+	const xmlOptions = buildOptions(options)
 	xmlOptions.headers['Content-Type'] = 'application/xml;charset=utf-8';
 	return httpRequest( { options: xmlOptions } )
 		.then(data => data)
